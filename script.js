@@ -12,3 +12,22 @@ monBouton.addEventListener("click", function(event) {
         resultat.innerText = "Veuillez remplir tous les champs obligatoires";
     }
 })
+
+
+
+// Correction
+
+// monBouton.addEventListener("click", function(event) {
+//     event.preventDefault();
+
+//     if (nomProduit.value != "" && quantité.value != "" && prixHt.value != "") {
+//         if (!isNaN(quantité.value) && !isNaN(prixHt.value)) {
+//             resultat.textContent = `Le prix HT est ${Math.round((quantité.value * prixHt.value) * 100) / 100} €`;
+//         } else {
+//             resultat.textContent = `Veuillez saisir des nombres`;
+//         }
+//     }
+//      else {
+//         resultat.textContent = "Veuillez remplir tous les champs obligatoires";
+//     }
+// })
