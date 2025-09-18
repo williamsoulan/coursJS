@@ -22,9 +22,9 @@ export default class Vehicule {
         if (this.vit > vehicule.vit) {
             return `Le vehicule ${this.nom} est le plus rapide`;
         } else  if (this.vit == vehicule.vit) {
-            return `${this.nom} et ${vehicule.nom} ont la même vitesse`;
-        } else {
-            return `Le vehicule ${vehicule.nom} est le plus rapide`;
-        }
+                return `${this.nom} et ${vehicule.nom} ont la même vitesse`;
+                } else {
+                return `Le vehicule ${vehicule.nom} est le plus rapide`;
+                }
     }
 }
