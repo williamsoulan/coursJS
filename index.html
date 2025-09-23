@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package.js</title>
+  </head>
+  <body>
+    <div id="create">
+    <h3>Créer un compte</h3>
+    <input type="text" id="nom" placeholder="Saisir le nom">
+    <button id="bt_create">Créer le compte</button>
+    </div>
+
+    <div id="operations">
+    <h3>Opérations</h3>
+    <input type="text" id="compte" placeholder="Saisir le compte">
+    <input type="text" id="montant" placeholder="Saisir le montant">
+    <button id="crediter">Créditer</button>
+    <button id="retirer">Retirer</button>
+    </div>
+
+    <div id="virement">
+    <h3>Virement</h3>
+    <input type="text" id="source" placeholder="Compte Source">
+    <input type="text" id="cible" placeholder="Compte Cible">
+    <input type="text" id="montant_virement" placeholder="Montant">
+    <button id="bt_virement">Virement</button>
+    </div>
+
+    <p id="message">Afficher les messages</p>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
