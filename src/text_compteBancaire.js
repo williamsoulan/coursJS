@@ -1,4 +1,5 @@
 import CompteBancaire from "./compteBancaire.js";
+import DOMPurify from 'dompurify';
 
 const comptes = [];
 const message = document.getElementById("message")
@@ -6,9 +7,11 @@ const creer = document.getElementById("bt_create");
 const nom = document.getElementById("nom");
 
 creer.addEventListener("click", function() {
-    if (nom.value != "") {
-        comptes.push(new CompteBancaire(nom.value, 0));
-        console.log(comptes)
+    const nomSecurise = DOMPurify.sanitize(nom.value);
+
+    if (nomSecurise !== "") {
+        comptes.push(new CompteBancaire(nomSecurise, 0));
+        console.log(comptes);
     } else {
          message.innerText = ("Remplissez les champs obligatoires");
     }
@@ -18,12 +21,14 @@ const crediter = document.getElementById("crediter");
 const montant = document.getElementById("montant");
 const compte = document.getElementById("compte");
 
-
 crediter.addEventListener("click", function() {
+    const compteSecurise = DOMPurify.sanitize(compte.value);
+    const montantSecurise = DOMPurify.sanitize(montant.value);
+
     for (let i = 0; i < comptes.length; i++) {
-        if (compte.value !== "" && montant.value !== "") {
-            if (compte.value == comptes[i].nom) {
-                comptes[i].solde += parseInt(montant.value);
+        if (compteSecurise !== "" && montantSecurise !== "") {
+            if (compteSecurise == comptes[i].nom) {
+                comptes[i].solde += parseInt(montantSecurise);
                 return console.log(comptes);
             }
 
@@ -36,10 +41,13 @@ crediter.addEventListener("click", function() {
 const retirer = document.getElementById("retirer");
 
 retirer.addEventListener("click", function() {
+    const compteSecurise = DOMPurify.sanitize(compte.value);
+    const montantSecurise = DOMPurify.sanitize(montant.value);
+
     for (let i = 0; i < comptes.length; i++) {
-        if (compte.value !== "" && montant.value !== "") {
-            if (compte.value == comptes[i].nom && comptes[i].solde >= montant.value) {
-                comptes[i].solde -= parseInt(montant.value);
+        if (compteSecurise !== "" && montantSecurise !== "") {
+            if (compteSecurise == comptes[i].nom && comptes[i].solde >= montantSecurise) {
+                comptes[i].solde -= parseInt(montantSecurise);
                 return console.log(comptes);
             } else {
                 message.innerText = ("Solde insuffisant");
@@ -55,14 +63,19 @@ const source = document.getElementById("source");
 const cible = document.getElementById("cible");
 const montantVirement = document.getElementById("montant_virement")
 
+
 virement.addEventListener("click", function() {
+    const sourceSecurise = DOMPurify.sanitize(source.value);
+    const cibleSecurise = DOMPurify.sanitize(cible.value);
+    const virementSecurise = DOMPurify.sanitize(montantVirement.value);
+
     for (let i = 0; i < comptes.length; i++) {
-        if (source.value !== "" && cible.value !== "" && cible.value !== "") {
-            if (source.value == comptes[i].nom && comptes[i].solde >= montantVirement.value) {
-                    comptes[i].solde -= parseInt(montantVirement.value);
+        if (sourceSecurise !== "" && cibleSecurise !== "") {
+            if (sourceSecurise == comptes[i].nom && comptes[i].solde >= virementSecurise) {
+                    comptes[i].solde -= parseInt(virementSecurise);
                     for (let j = 0; j < comptes.length; j++) {
-                        if (cible.value == comptes[j].nom) {
-                            comptes[j].solde += parseInt(montantVirement.value);
+                        if (cibleSecurise == comptes[j].nom) {
+                            comptes[j].solde += parseInt(virementSecurise);
                             return console.log(comptes);
                         }
                     };
