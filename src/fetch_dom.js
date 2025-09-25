@@ -45,6 +45,7 @@ const getMeteoJson = async (city) => {
 const titre1 = document.querySelector("#id_title1");
 const titre2 = document.querySelector("#id_title2");
 const titre3 = document.querySelector("#id_title3");
+const image = document.createElement("img");
 
 charger.addEventListener('click', () => {
     if (ville.value != "") {
@@ -61,7 +62,6 @@ charger.addEventListener('click', () => {
                 titre1.textContent = `Ville : ${data.name}`;
                 titre2.textContent = `Température : ${data.main.temp} °`;
                 titre3.textContent = `Temps : ${data.weather[0].description}`;
-                const image = document.createElement("img");
                 image.setAttribute("style", "width : 90px; height : 90px; alignSelf : start");
                 image.setAttribute("src", `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
                 box.appendChild(image);
