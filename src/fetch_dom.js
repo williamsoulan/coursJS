@@ -19,7 +19,7 @@ blocMeteo.appendChild(box);
 // 11
 for (let i = 0; i < 3; i++) {
     const titre = document.createElement("h2");
-    Object.assign(box.style, { // 12
+    Object.assign(titre.style, { // 12
     width : "auto",
     height : "10vh",
     backgroundColor : "grey",
@@ -35,9 +35,13 @@ for (let i = 0; i < 3; i++) {
 
 // 16
 const getMeteoJson = async (city) => {
-    return await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=` + apiKey)
+    return await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=fr&units=metric&appid=` + apiKey)
         .then(response => {
-            return response.json();
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                return response;
+            }
         })
 }
 
@@ -50,10 +54,9 @@ const image = document.createElement("img");
 charger.addEventListener('click', () => {
     if (ville.value != "") {
 
-        return getMeteoJson(ville.value)
-        .then(data => {
+        getMeteoJson(ville.value).then(data => {
 
-            if (data.cod == "404") {
+            if (data.status == 404) {
                 titre1.textContent = `La ville n'existe pas`;
                 titre2.textContent = ``;
                 titre3.textContent = ``;
@@ -65,7 +68,8 @@ charger.addEventListener('click', () => {
                 image.setAttribute("style", "width : 90px; height : 90px; alignSelf : start");
                 image.setAttribute("src", `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
                 box.appendChild(image);
-            }});
+            }
+        });
     } else {
         titre1.textContent = `Remplir les champs obligatoires`;
         titre2.textContent = ``;
